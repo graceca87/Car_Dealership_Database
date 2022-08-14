@@ -23,9 +23,6 @@ CREATE TABLE customer (
   car_id INTEGER
 );
 
-SELECT *
-FROM customer
-
 -- Add Foreign Keys on "customer" (invoice_id, car_id)
 
 CREATE TABLE salesperson (
@@ -44,7 +41,6 @@ CREATE TABLE mechanic (
   ticket_id INTEGER,
   dealership_id INTEGER
 );
-
 
 -- Add Foreign Keys on "mechanic" (ticket_id, dealership_id)
 
@@ -109,9 +105,6 @@ CREATE TABLE add_on (
 ------------------------------------- ADD DATA -----------------------------------------
 
 
--- Car [serial_num INTEGER, year INTEGER, make VARCHAR(20), model VARCHAR(20),
--- customer_id INTEGER, salesperson_id INTEGER, dealership_id INTEGER NOT NULL]
-
 -- Create procedure to add data to car:
 
 CREATE OR REPLACE PROCEDURE add_car(
@@ -144,8 +137,6 @@ CALL add_car(18294, 2017, 'Ford', 'F150', 8, 15, 33);
 CALL add_car(12323, 2015, 'Kia', 'Sorrento', 9, 22, 33);
 CALL add_car(13445, 2013, 'Dodge', 'Ram', 10, 25, 33);
 
-SELECT *
-FROM car;
 
 -- Create procedure to add data to customer:
 CREATE OR REPLACE PROCEDURE add_customer(
@@ -174,30 +165,27 @@ CALL add_customer('Buckley', 'Alfonsi', 6, 10);
 CALL add_customer('Joey', 'Cunniff', 5, 1);
 CALL add_customer('Nora', 'Keene', 4, 7);
 
-SELECT *
-FROM customer;
+
 
 
 -- Insert data into salesperson table:
 --(salesperson_id, first_name, last_name, dealership_id);
 
-INSERT INTO salesperson(first_name, last_name, dealership_id)
+INSERT INTO salesperson(salesperson_id, first_name, last_name, dealership_id)
 VALUES (20, 'Robert', 'Selwitz', 33);
 
-INSERT INTO salesperson(first_name, last_name, dealership_id)
+INSERT INTO salesperson(salesperson_id, first_name, last_name, dealership_id)
 VALUES (13, 'Joe', 'Berman', 33);
 
-INSERT INTO salesperson(first_name, last_name, dealership_id)
+INSERT INTO salesperson(salesperson_id, first_name, last_name, dealership_id)
 VALUES (22, 'Debbie', 'Miller', 33);
 
-INSERT INTO salesperson(first_name, last_name, dealership_id)
+INSERT INTO salesperson(salesperson_id, first_name, last_name, dealership_id)
 VALUES (15, 'Brenda', 'MacGowan', 33);
 
-INSERT INTO salesperson(first_name, last_name, dealership_id)
+INSERT INTO salesperson(salesperson_id, first_name, last_name, dealership_id)
 VALUES (25, 'Ron', 'Johnson', 33);
 
-SELECT *
-FROM salesperson;
 
 
 -- Insert data into mechanic table:
@@ -218,8 +206,6 @@ VALUES ('Jerry', 'Shaw', 33);
 INSERT INTO mechanic(first_name, last_name, dealership_id)
 VALUES ('Ron', 'Johnson', 33);
 
-SELECT *
-FROM mechanic;
 
 
 -- Insert data into  dealership:
@@ -231,8 +217,6 @@ VALUES (33, '123 Monroe Ave, Chicago, IL 60618', 'Zippy Automotives');
 INSERT INTO dealership(dealership_id, address, name)
 VALUES (65, '71 State St, Chicago IL 60643', 'Jupiter Wheels & Deals');
 
-SELECT *
-FROM dealership;
 
 
 -- Insert data into service:
@@ -253,8 +237,6 @@ VALUES (TRUE, FALSE, TRUE, FALSE, TRUE);
 INSERT INTO service(oil_change, tire_rotation, tune_up, replace_part, other)
 VALUES (FALSE, FALSE, FALSE, TRUE, FALSE);
 
-SELECT *
-FROM service s 
 
 
 -- Insert data into service_ticket:
@@ -278,8 +260,6 @@ VALUES ('replace break pads', 83.00, 8, 1, 5, 12332);
 INSERT INTO service_ticket(service_type, price, mechanic_id, serial_num)
 VALUES ('paint job', 233.00, 1, 13445);
 
-SELECT *
-FROM service_ticket
 
 
 -- Insert data into add_on:
@@ -301,45 +281,40 @@ VALUES (FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, 349.99);
 INSERT INTO add_on(digital_display, leather_interior, sun_roof, power_windows, heated_seats, navigation, backup_camera, add_on_price)
 VALUES (TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, 4500.00);
 
-SELECT *
-FROM add_on 
-
 
 -- Insert data into invoice:
 --(invoice_id, car_id, base_price, add_on_price, customer_id, salesperson_id, ticket_id, dealership_id) 
 
-INSERT INTO invoice(car_id, base_price, add_on_price, customer_id, salesperson_id, ticket_id, dealership_id)
+INSERT INTO invoice(invoice_id, car_id, base_price, add_on_price, customer_id, salesperson_id, ticket_id, dealership_id)
 VALUES (1, 3, 3500.00, 0, 1, 20, 1, 33);
 
-INSERT INTO invoice(car_id, base_price, add_on_price, customer_id, salesperson_id, ticket_id, dealership_id)
+INSERT INTO invoice(invoice_id, car_id, base_price, add_on_price, customer_id, salesperson_id, ticket_id, dealership_id)
 VALUES (2, 4, 12400.00, 250.00, 2, 25, NULL, 33);
 
-INSERT INTO invoice(car_id, base_price, add_on_price, customer_id, salesperson_id, ticket_id, dealership_id)
+INSERT INTO invoice(invoice_id, car_id, base_price, add_on_price, customer_id, salesperson_id, ticket_id, dealership_id)
 VALUES (3, 5, NULL, NULL, 3, NULL, 5, 33);
 
-INSERT INTO invoice(car_id, base_price, add_on_price, customer_id, salesperson_id, ticket_id, dealership_id)
+INSERT INTO invoice(invoice_id, car_id, base_price, add_on_price, customer_id, salesperson_id, ticket_id, dealership_id)
 VALUES (4, 6, 10200.00, 0, 4, 20, NULL, 33);
 
-INSERT INTO invoice(car_id, base_price, add_on_price, customer_id, salesperson_id, ticket_id, dealership_id)
+INSERT INTO invoice(invoice_id, car_id, base_price, add_on_price, customer_id, salesperson_id, ticket_id, dealership_id)
 VALUES (5, 7, 28600, 2200, 5, 13, NULL, 33);
 
-INSERT INTO invoice(car_id, base_price, add_on_price, customer_id, salesperson_id, ticket_id, dealership_id)
+INSERT INTO invoice(invoice_id, car_id, base_price, add_on_price, customer_id, salesperson_id, ticket_id, dealership_id)
 VALUES (6, 8, NULL, NULL, NULL, NULL, 6, 33);
 
-INSERT INTO invoice(car_id, base_price, add_on_price, customer_id, salesperson_id, ticket_id, dealership_id)
+INSERT INTO invoice(invoice_id, car_id, base_price, add_on_price, customer_id, salesperson_id, ticket_id, dealership_id)
 VALUES (7, 9, 5300.00, NULL, 7, 20, NULL, 33);
 
-INSERT INTO invoice(car_id, base_price, add_on_price, customer_id, salesperson_id, ticket_id, dealership_id)
+INSERT INTO invoice(invoice_id, car_id, base_price, add_on_price, customer_id, salesperson_id, ticket_id, dealership_id)
 VALUES (8, 10, 16000, 1500, 8, 15, NULL, 33);
 
-INSERT INTO invoice(car_id, base_price, add_on_price, customer_id, salesperson_id, ticket_id, dealership_id)
+INSERT INTO invoice(invoice_id, car_id, base_price, add_on_price, customer_id, salesperson_id, ticket_id, dealership_id)
 VALUES (9, 11, 10500.00, NULL, 9, 22, NULL, 33);
 
-INSERT INTO invoice(car_id, base_price, add_on_price, customer_id, salesperson_id, ticket_id, dealership_id)
+INSERT INTO invoice(invoice_id, car_id, base_price, add_on_price, customer_id, salesperson_id, ticket_id, dealership_id)
 VALUES (10, 12, 6500, NULL, 10, 25, 3, 33);
 
-SELECT *
-FROM invoice 
 
 ------------------------------------- ADD FOREIGN KEYS -----------------------------------------
 
@@ -377,7 +352,6 @@ ADD FOREIGN KEY(customer_id) REFERENCES customer(customer_id),
 ADD FOREIGN KEY(salesperson_id) REFERENCES salesperson(salesperson_id),
 ADD FOREIGN KEY(ticket_id) REFERENCES service_ticket(ticket_id),
 ADD FOREIGN KEY(dealership_id) REFERENCES dealership(dealership_id);
-
 
 
 
